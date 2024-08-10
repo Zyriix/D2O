@@ -38,7 +38,7 @@ class Loss:
     def accumulate_gradients(self, images, labels, augment_pipe=None, step='g', do_r1=False ,**kwargs): # to be overridden by subclass
         raise NotImplementedError()
 
-class GDDLoss(Loss):
+class D2OLoss(Loss):
     def __init__(self, g,d, lpips_net, feature_net, score_net,freeze_layer=[],multi_step_g=1, cond=False,teacher_only=False, teacher_type='none', loss_type='ns',middle_sigma=0.8,  r1_type='ns',  r1_gamma=0.01,  max_steps=4, use_gp=True, **kwargs):
         # Generator
         self.g = g

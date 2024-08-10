@@ -1,44 +1,59 @@
-NOTE:
->**I am actively seeking a PhD or Research Assistant (RA) position in image and video generation. Additionally, I would greatly appreciate any GPU resources to support my research. You can download my [CV](https://drive.google.com/file/d/1v76e36V_af32eQywL7sKP0a4hLLy9zwL/view?usp=drive_link) and [Statement of Purpose (SOP)](https://drive.google.com/file/d/1N3oPb7LSTa1NElNFU-HvDE0YlWnye8wl/view?usp=drive_link) here. Please don’t hesitate to contact (zyriix213@gmail.com) me if you are interested in working with me.**
 
-# GDD - Official Pytorch implementation
-![image](./fig/main.png)
+> 📢 News: Our revised paper has been accepted to ICML 2025!
+This repository is now linked to the latest version of the paper under the new name D2O. The core code remains unchanged—feel free to explore and use it!
+
+# D2O - Official Pytorch implementation
+📄[Click here to view the paper (PDF)](./fig/Fig1.pdf)
 
 
 
-## Diffusion Models Are Innate One-Step Generators  [[arxiv]](https://arxiv.org/abs/2405.20750)
+## Revisiting Diffusion Models: From Generative Pre-training to One-Step Generation  
+
+Original version on arXiv: [[arXiv:2405.20750]](https://arxiv.org/abs/2405.20750)  
+Accepted version (ICML 2025) on arXiv: coming soon!
+
 
 Bowen Zheng, Tianming Yang
 
-*Diffusion Models (DMs) have achieved great success in image generation and
-other fields. By fine sampling through the trajectory defined by the SDE/ODE
-solver based on a well-trained score model, DMs can generate remarkable high-
-quality results. However, this precise sampling often requires multiple steps and is
-computationally demanding. To address this problem, instance-based distillation
-methods have been proposed to distill a one-step generator from a DM by having
-a simpler student model mimic a more complex teacher model. Yet, our research
-reveals an inherent limitations in these methods: the teacher model, with more steps
-and more parameters, occupies different local minima compared to the student
-model, leading to suboptimal performance when the student model attempts to
-replicate the teacher. To avoid this problem, we introduce a novel distributional
-distillation method, which uses an exclusive distributional loss. This method
-exceeds state-of-the-art (SOTA) results while requiring significantly fewer training
-images. Additionally, we show that DMs’ layers are activated differently at different
-time steps, leading to an inherent capability to generate images in a single step.
-Freezing most of the convolutional layers in a DM during distributional distillation
-leads to further performance improvements. Our method achieves the SOTA results
-on CIFAR-10 (FID 1.54), AFHQv2 64x64 (FID 1.23), FFHQ 64x64 (FID 0.85)
-and ImageNet 64x64 (FID 1.16) with great efficiency. Most of those results are
-obtained with only 5 million training images within 6 hours on 8 A100 GPUs. This
-breakthrough not only enhances the understanding of efficient image generation
-models but also offers a scalable framework for advancing the state of the art in
-various applications.*
+*Diffusion distillation is a widely used technique
+to reduce the sampling cost of diffusion models,
+yet it often requires extensive training, and the
+student performance tends to be degraded. Re-
+cent studies show that incorporating a GAN ob-
+jective may alleviate these issues, yet the under-
+lying mechanism remains unclear. In this work,
+we first identify a key limitation of distillation:
+mismatched step sizes and parameter numbers be-
+tween the teacher and the student model lead them
+to converge to different local minima, rendering
+direct imitation suboptimal. We further demon-
+strate that a standalone GAN objective, without
+relying a distillation loss, overcomes this limita-
+tion and is sufficient to convert diffusion models
+into efficient one-step generators. Based on this
+finding, we propose that diffusion training may be
+viewed as a form of generative pre-training, equip-
+ping models with capabilities that can be unlocked
+through lightweight GAN fine-tuning. Supporting
+this view, we create a one-step generation model
+by fine-tuning a pre-trained model with 85% of
+parameters frozen, achieving strong performance
+with only 0.2M images and near-SOTA results
+with 5M images. We further present a frequency-
+domain analysis that may explain the one-step
+generative capability gained in diffusion training.
+Overall, our work provides a new perspective for
+diffusion training, highlighting its role as a power-
+ful generative pre-training process, which can be
+the basis for building efficient one-step generation
+models.*
+
 
 ## Related Repositories
 The references for computing FID are from [EDM](https://github.com/NVlabs/edm), and a large portion of codes in this repo is based on [EDM](https://github.com/NVlabs/edm) and [StyleGAN2-ADA](https://github.com/NVlabs/stylegan2-ada-pytorch). 
 
 ## Prepare Environments
-> conda create -n gdd python=3.9
+> conda create -n D2O python=3.9
 
 Use conda instead of pip to install TensorFlow; otherwise, the GPU driver will not be found.
 > conda install tensorflow-gpu
@@ -59,10 +74,10 @@ If you are only interested im validation or inference.
 NOTE: To release the training code as quickly as possible, we’ve modified and removed a large portion of irrelevant or experimental code for clarity. We will continuously check the results but there might be some potential issues. If you have any problems, please open an issue, and we will reply ASAP.
 
 ### Download Diffusion Checkpoints
-Follow [EDM's guaidance](https://github.com/NVlabs/edm?tab=readme-ov-file#pre-trained-models), and put the checkpoints into `GDD/pretrained`, e.g., `GDD/pretrained/edm-afhqv2-64x64-uncond-ve.pkl`.
+Follow [EDM's guaidance](https://github.com/NVlabs/edm?tab=readme-ov-file#pre-trained-models), and put the checkpoints into `D2O/pretrained`, e.g., `D2O/pretrained/edm-afhqv2-64x64-uncond-ve.pkl`.
 
 ### Prepare the datasets
-Follow [EDM's guaidance](https://github.com/NVlabs/edm?tab=readme-ov-file#preparing-datasets), and put the datasets into `GDD/datasets`, e.g., `GDD/datasets/cifar10-32x32.zip`
+Follow [EDM's guaidance](https://github.com/NVlabs/edm?tab=readme-ov-file#preparing-datasets), and put the datasets into `D2O/datasets`, e.g., `D2O/datasets/cifar10-32x32.zip`
 ### Running
 All the training commands are available in `train.sh`. You may modify the parameters according to your needs.
 > sh train.sh
@@ -70,7 +85,7 @@ All the training commands are available in `train.sh`. You may modify the parame
 ## Validation
 
 ### Download Checkpoints
-Download from [Google Drive](https://drive.google.com/drive/folders/1U0lrxJWcLt5d3oAbVUU3FJOY0lQSrZQH?usp=sharing), and put the model to `GDD/all_ckpt`. E.g., `GDD/all_ckpt/cifar_uncond_gdd_i.pkl`
+Download from [Google Drive](https://drive.google.com/drive/folders/1U0lrxJWcLt5d3oAbVUU3FJOY0lQSrZQH?usp=sharing), and put the model to `D2O/all_ckpt`. E.g., `D2O/all_ckpt/cifar_uncond_D2O_i.pkl`
 
 ### FID
 > sh validation_fid.sh
@@ -88,24 +103,24 @@ Then
 
 
 ## CLIP-FID Metrics
-In the study "[The Role of ImageNet Classes in Fréchet Inception Distance](https://arxiv.org/abs/2203.06026)", raised concerns about potential data leakage in FID when using discriminator pretrained on ImageNet. We provide CLIP-FID below. Our method consistently shows superior or competitive performance with significantly less training data.
+Potential data leakage in FID when using a discriminator pre-trained on ImageNet has been a concern ([The Role of ImageNet Classes in Fréchet Inception Distance](https://arxiv.org/abs/2203.06026)). We provide CLIP-FID in Table \ref{tab:CLIP}. Our method consistently shows superior or competitive performance with significantly less training data. The result indicates that the superior performance is not due to information leakage but the pretrained ability gained in diffusion training.
 
 |Dataset|Model|CLIP-FID|FID|Training Img
 |-|-|-|-|-|
 |CIFAR10|EDM|**0.53**|1.98||
 ||CD|1.26|4.10|~100M|1|
 ||SiD|0.65|1.92|~400M|1|
-||GDD-I|0.66|**1.56**|**~5M**|
+||D2O-F|0.66|**1.56**|**~5M**|
 |FFHQ|EDM|1.18|2.39||
 ||SiD|**0.80**|1.55|~500M|1|
-||GDD-I|0.81|**0.83**|**~9M**|
+||D2O-F|0.81|**0.83**|**~9M**|
 |AFHQv2|EDM|0.40|1.96||
 ||SiD|0.32|1.62|~300M|1|
-||GDD-I|**0.18**|**1.24**|**~7M**|
+||D2O-F|**0.18**|**1.24**|**~7M**|
 |ImageNet|EDM|0.82|2.64||
 ||CD|2.93|6.87|~1000M|1|
 ||SiD|0.75|1.52|~930M|1|
-||GDD-I|**0.51**|**1.13**|**~6M**|
+||D2O-F|**0.51**|**1.13**|**~6M**|
 
 
 ## Citation

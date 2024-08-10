@@ -530,7 +530,7 @@ class EDMPrecond(torch.nn.Module):
         return torch.as_tensor(sigma)
 
 @persistence.persistent_class
-class GDDPrecond(torch.nn.Module):
+class D2OPrecond(torch.nn.Module):
     def __init__(self,
         img_resolution,                     # Image resolution.
         img_channels,                       # Number of color channels.

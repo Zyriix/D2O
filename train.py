@@ -44,7 +44,7 @@ def parse_int_list(s):
 # Main options.
 @click.option('--outdir',        help='Where to save the results', metavar='DIR',                   type=str, required=True)
 @click.option('--data',          help='Path to the dataset', metavar='ZIP|DIR',                     type=str, required=True)
-@click.option('--loss',       help='loss function', metavar='gdd|vp|ve|edm',       type=click.Choice(['gdd', 'vp', 've', 'edm']), default='gdd', show_default=True)
+@click.option('--loss',       help='loss function', metavar='d2o|vp|ve|edm',       type=click.Choice(['d2o', 'vp', 've', 'edm']), default='d2o', show_default=True)
 
 # Options when using instance-based disitllation
 @click.option('--teacher-type',       help='teacher type when using instance based distillation(CD,CTM,etc)', metavar='BOOL',      type=str, default='none', show_default=True)
@@ -56,7 +56,7 @@ def parse_int_list(s):
 # Generators
 @click.option('--cond',          help='Train class-conditional model', metavar='BOOL',              type=bool, default=False, show_default=True)
 @click.option('--arch',          help='Network architecture', metavar='|ddpmpp|ncsnpp|adm',          type=click.Choice(['ddpmpp','ncsnpp', 'adm']), default='ncsnpp', show_default=True)
-@click.option('--precond',       help='Preconditioning & loss function', metavar='vp|ve|edm|gdd',       type=click.Choice(['gdd','vp', 've', 'edm']), default='gdd', show_default=True)
+@click.option('--precond',       help='Preconditioning & loss function', metavar='vp|ve|edm|d2o',       type=click.Choice(['d2o','vp', 've', 'edm']), default='d2o', show_default=True)
 @click.option('--multi-step-g',         help='The step of generators',              type=click.IntRange(min=1), default=1, show_default=True)
 @click.option('--freeze',         help='Free Layer options',               type=click.IntRange(min=0), default=0, show_default=True)
 @click.option('--transfer',      help='Initialized from pretrained diffusion models', metavar='PKL|URL',   type=str)
@@ -162,8 +162,8 @@ def main(**kwargs):
         c.network_kwargs.class_name = 'training.networks.VPPrecond'
     elif opts.precond == 've':
         c.network_kwargs.class_name = 'training.networks.VEPrecond'
-    elif opts.precond == 'gdd':
-        c.network_kwargs.class_name = 'training.networks.GDDPrecond'
+    elif opts.precond == 'd2o':
+        c.network_kwargs.class_name = 'training.networks.D2OPrecond'
     else:
         c.network_kwargs.class_name = 'training.networks.EDMPrecond'
 
@@ -171,8 +171,8 @@ def main(**kwargs):
         c.loss_kwargs.class_name = 'training.loss.VPLoss'
     elif opts.loss == 've':
          c.loss_kwargs.class_name = 'training.loss.VELoss'
-    elif opts.loss == 'gdd':
-        c.loss_kwargs.class_name = 'training.loss.GDDLoss'
+    elif opts.loss == 'd2o':
+        c.loss_kwargs.class_name = 'training.loss.D2OLoss'
         c.loss_kwargs.lpips = opts.lpips
         c.loss_kwargs.max_steps = opts.max_steps
         c.loss_kwargs.target = opts.target

@@ -5,11 +5,11 @@ export MKL_NUM_THREADS=1
 
 
 ckpt_path=(
-   all_ckpt/cifar_uncond_gdd_i.pkl
-   all_ckpt/cifar_cond_gdd_i.pkl
-   all_ckpt/ffhq_gdd_i.pkl
-   all_ckpt/afhqv2_gdd.pkl
-   all_ckpt/imagenet_gdd_i.pkl
+   all_ckpt/cifar_uncond_d2o_f.pkl
+   all_ckpt/cifar_cond_d2o_f.pkl
+   all_ckpt/ffhq_d2o_f.pkl
+   all_ckpt/afhqv2_d2o.pkl
+   all_ckpt/imagenet_d2o_f.pkl
 
 )
 ref_path=(
