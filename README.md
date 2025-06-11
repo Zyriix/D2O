@@ -2,7 +2,7 @@
 > This repository is now linked to the latest version of the paper under the new name D2O. The underlying codebase has not changed, so feel free to explore and use it!
 
 
-# D2O - Official Pytorch implementation ![image](./fig/Fig1.png)
+# D2O - Official Pytorch implementation ![image](./fig/main.png)
 ## Revisiting Diffusion Models: From Generative Pre-training to One-Step Generation  
 
 Original version on arXiv: [[arXiv:2405.20750]](https://arxiv.org/abs/2405.20750)  
