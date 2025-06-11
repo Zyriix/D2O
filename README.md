@@ -1,12 +1,8 @@
-
 > 📢 News: Our revised paper has been accepted to ICML 2025!
-This repository is now linked to the latest version of the paper under the new name D2O. The core code remains unchanged—feel free to explore and use it!
-
-# D2O - Official Pytorch implementation
-📄[Click here to view the paper (PDF)](./fig/Fig1.pdf)
+> This repository is now linked to the latest version of the paper under the new name D2O. The underlying codebase has not changed, so feel free to explore and use it!
 
 
-
+# D2O - Official Pytorch implementation ![image](./fig/Fig1.png)
 ## Revisiting Diffusion Models: From Generative Pre-training to One-Step Generation  
 
 Original version on arXiv: [[arXiv:2405.20750]](https://arxiv.org/abs/2405.20750)  
