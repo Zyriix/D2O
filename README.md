@@ -6,7 +6,7 @@
 ## Revisiting Diffusion Models: From Generative Pre-training to One-Step Generation  
 
 Original version on arXiv: [[arXiv:2405.20750]](https://arxiv.org/abs/2405.20750)  
-Accepted version (ICML 2025) on arXiv: coming soon!
+Accepted version (ICML 2025) on arXiv: [[arXiv:2506.09376]](http://arxiv.org/abs/2506.09376)
 
 
 Bowen Zheng, Tianming Yang
