@@ -122,13 +122,12 @@ Potential data leakage in FID when using a discriminator pre-trained on ImageNet
 ## Citation
 If you find our work useful, please consider citing our work:
 
->@misc{zheng2024diffusionmodelsinnateonestep,
-     title={Diffusion Models Are Innate One-Step Generators}, \
-      author={Bowen Zheng and Tianming Yang},\
-      year={2024},\
-      eprint={2405.20750},\
-      archivePrefix={arXiv},\
-      primaryClass={cs.CV},\
-      url={https://arxiv.org/abs/2405.20750}, \
+>@misc{zheng2025revisitingdiffusionmodelsgenerative,
+      title={Revisiting Diffusion Models: From Generative Pre-training to One-Step Generation}, 
+      author={Bowen Zheng and Tianming Yang},
+      year={2025},
+      eprint={2506.09376},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2506.09376}, 
 }
-
